@@ -20,6 +20,7 @@ class MainActivity : AppCompatActivity() {
         parcel.writeInt(23)
         parcel.writeInt(100)
         parcel.writeChar('Z')
+        parcel.writeFloat(12.88f)
 //        parcel.writeString("zuoxijie")
         parcel.writeString("zhangSan")
 //        parcel.writeInt(34)
@@ -31,6 +32,7 @@ class MainActivity : AppCompatActivity() {
         Log.e("zuojie", "==readInt222==" + parcel.readInt())
 
         Log.e("zuojie", "==readChar==" + parcel.readChar())
+        Log.e("zuojie", "==readFloat==" + parcel.readFloat())
         Log.e("zuojie", "==readString==" + parcel.readString())
 //        Log.e("zuojie", "==readString==" + parcel.readString())
 //        Log.e("zuojie", "==readInt333==" + parcel.readInt())

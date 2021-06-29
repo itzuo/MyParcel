@@ -40,6 +40,13 @@ public:
     int32_t readInt32();
 
     const void* readInplace(size_t len);
+
+    template<class T>
+    int writeAligned(T len);
+
+    int writeFloat(float val);
+
+    float readFloat();
 };
 
 

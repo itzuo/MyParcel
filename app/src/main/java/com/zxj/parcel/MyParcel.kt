@@ -41,6 +41,14 @@ class MyParcel {
         return nativeReadString(mNativePtr);
     }
 
+    fun writeFloat(value: Float) = nativeWriteFloat(mNativePtr,value)
+
+    fun readFloat() = nativeReadFloat(mNativePtr)
+
+    private external fun nativeReadFloat(mNativePtr: Long): Float;
+
+    private external fun nativeWriteFloat(mNativePtr: Long,value: Float);
+
     private external fun nativeCreate(): Long
 
     private external fun nativeWriteInt(mNativePtr: Long, value: Int)

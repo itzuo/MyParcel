@@ -83,3 +83,20 @@ Java_com_zxj_parcel_MyParcel_nativeReadChar(JNIEnv *env, jobject thiz, jlong m_n
     Parcel *parcel = reinterpret_cast<Parcel *>(m_native_ptr);
     return parcel->readChar();
 }
+
+
+extern "C"
+JNIEXPORT void JNICALL
+Java_com_zxj_parcel_MyParcel_nativeWriteFloat(JNIEnv *env, jobject thiz, jlong m_native_ptr,
+                                              jfloat value) {
+    Parcel *parcel = reinterpret_cast<Parcel *>(m_native_ptr);
+    parcel->writeFloat(value);
+
+}
+
+extern "C"
+JNIEXPORT jfloat JNICALL
+Java_com_zxj_parcel_MyParcel_nativeReadFloat(JNIEnv *env, jobject thiz, jlong m_native_ptr) {
+    Parcel *parcel = reinterpret_cast<Parcel *>(m_native_ptr);
+    return parcel->readFloat();
+}

@@ -18,8 +18,9 @@ Parcel::~Parcel() {
 }
 
 void Parcel::writeInt(int value) {
-    * reinterpret_cast<int *>(this->mData + this->mDataPos) = value;
-    mDataPos += sizeof(int);
+    /** reinterpret_cast<int *>(this->mData + this->mDataPos) = value;
+    mDataPos += sizeof(int);*/
+    writeInt32(value);
 }
 
 int Parcel::readInt() {
@@ -73,10 +74,7 @@ const char16_t* Parcel::readString16Inplace() {
 }
 
 int Parcel::writeInt32(int32_t len) {
-    //存字符串的长度值
-    * reinterpret_cast<int32_t *>(mData + mDataPos) = len;
-    LOGE("writeInt32=>mDataPos=%d, 把字符串的长度len=%d存储首位",mDataPos,* reinterpret_cast<int *>(mData + mDataPos));
-    return finisWrite(sizeof(len));
+    return writeAligned(len);
 }
 
 int Parcel::finisWrite(size_t len) {
@@ -108,5 +106,24 @@ const void* Parcel::readInplace(size_t len) {
 //    mDataPos += len;
     finisWrite(len);
     return data;
+}
+
+template<class T>
+int Parcel::writeAligned(T len) {
+    //存字符串的长度值
+    * reinterpret_cast<T *>(mData + mDataPos) = len;
+    LOGE("writeInt32=>mDataPos=%d, 把字符串的长度len=%d存储首位",mDataPos,* reinterpret_cast<int *>(mData + mDataPos));
+    return finisWrite(sizeof(len));
+}
+
+int Parcel::writeFloat(float val) {
+    LOGE("writeFloat = %f",val)
+    return writeAligned(val);
+}
+
+float Parcel::readFloat() {
+    const void* data = mData + mDataPos;
+    finisWrite(sizeof(float));
+    return *reinterpret_cast<const float*>(data);
 }
 
